@@ -1,0 +1,19 @@
+# TP INF3611 — serveur iperf3 permanent sur le port 5201
+[Unit]
+Description=iperf3 server (TP INF3611 - commandes avancees reseau)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+DynamicUser=yes
+ExecStart=/usr/bin/iperf3 -s -p 5201
+Restart=on-failure
+RestartSec=2
+# pas de privilège nécessaire sur le port 5201
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+
+[Install]
+WantedBy=multi-user.target
